@@ -1,51 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityStandardAssets.CrossPlatformInput;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerMove : MonoBehaviour
 {
-    private NavMeshAgent nav;
-    private Animator anim;
-    private Ray ray;
-    private RaycastHit hit;
+    public FixedJoystick joystick;
+    public JoyButton joybutton;
+    public FixedTouchField touchfield;
 
-    private float x;
-    private float z;
-    private float velocitySpeed;
-    // Start is called before the first frame update
-    void Start()
+    // protected bool jump;
+
+    void Start ()
     {
-        nav = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update () 
     {
-        //Calculate velocity speed
-        x = nav.velocity.x;
-        z = nav.velocity.z;
-        velocitySpeed = x + z;
-            
+        var fps = GetComponent<RigidbodyFirstPersonController>();
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit))
-            {
-                nav.destination = hit.point;
-            }
-        }
-
-        if(velocitySpeed != 0)
-        {
-            anim.SetBool("sprinting", true);
-        } 
-
-        if(velocitySpeed == 0)
-        {
-            anim.SetBool("sprinting", false);
-        }
+        fps.RunAxis = joystick.Direction;
+        fps.JumpAxis = joybutton.Pressed;
+        fps.mouseLook.LookAxis = touchfield.TouchDist;
     }
+
+
+    // void Start()
+    // {
+    //     joystick = FindObjectOfType<Joystick>();
+    //     joybutton = FindObjectOfType<JoyButton>();
+    // }
+
+    // void Update()
+    // {
+    //     //public Vector3(float x, float y, float z);    
+    //     var rigidbody = GetComponent<Rigidbody>();
+    //     rigidbody.velocity = new Vector3(joystick.Vertical * 100f + Input.GetAxis("Vertical") * 100f,
+    //                                     rigidbody.velocity.y,
+    //                                     joystick.Horizontal * -100f + Input.GetAxis("Horizontal") * -100f);
+    //     if(!jump && joybutton.Pressed)
+    //     {
+    //         jump = true;
+    //         rigidbody.velocity += Vector3.up * 100f;
+    //     }
+
+    //     if(jump && !joybutton.Pressed)
+    //     {
+    //         jump = false;
+    //     }
+    // }
 }
