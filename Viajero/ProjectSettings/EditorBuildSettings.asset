@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 3e012dce0a67833498656c62fb621cea
   - enabled: 1
-    path: Assets/Scenes/LoadingScreen.unity
-    guid: 66190215c2e0e9847a9e70abeafb7bed
-  - enabled: 1
     path: Assets/Scenes/Welcome Screen.unity
     guid: cd8d9dd05286b3447ae04036eb2d19e0
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: 27eacc28c0c608a49b8955464bf25dd6
+  - enabled: 1
+    path: Assets/Scenes/Quizzer.unity
+    guid: 3361ad58df1af824eb6e4db4c4f81c16
   m_configObjects: {}
